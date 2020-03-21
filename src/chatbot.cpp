@@ -44,7 +44,79 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+ChatBot::ChatBot(ChatBot &source)
+{
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _image = source._image;
 
+    source._chatLogic = nullptr;
+    source._rootNode = nullptr;
+    source._currentNode = nullptr;
+    source._image = NULL;
+
+    std::cout << "Copying content of instance " << &source << " to instance " << this << std::endl;    
+}
+
+ChatBot& ChatBot::operator=(ChatBot &source)
+{
+    std::cout << "Assigning content of instancen " << &source << " to instance " << this << std::endl;
+    if (this == &source)
+    {
+        return *this;
+    }
+    // delete _chatLogic;
+    // delete _rootNode;
+    // delete _image;
+    // _chatLogic = new ChatLogic;
+    // _rootNode = new GraphNode(source._rootNode->GetID());
+    // _image = new wxBitmap;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _image = source._image;
+
+    source._rootNode = nullptr;
+    source._chatLogic = nullptr;
+    source._currentNode = nullptr;
+    source._image = NULL;
+
+    return *this;
+    
+}
+
+ChatBot::ChatBot(ChatBot &&source)
+{
+    std::cout << "Moving instance " << &source << " to instance " << this << std::endl;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _image = source._image;
+    source._chatLogic = nullptr;
+    source._currentNode = nullptr;
+    source._image = nullptr;
+
+}
+
+ChatBot& ChatBot::operator = (ChatBot &&source)
+{
+    std::cout << "Moving, assign instance" << &source << " to instance " << this << std::endl;
+    if(this == &source)
+    {
+        return *this;
+    }
+    delete _chatLogic;
+    delete _rootNode;
+    delete _image;
+
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _image = source._image;
+
+    source._chatLogic = nullptr;
+    source._rootNode = nullptr;
+    source._image = nullptr;
+
+    return *this;
+}
 ////
 //// EOF STUDENT CODE
 
