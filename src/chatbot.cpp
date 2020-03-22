@@ -48,8 +48,12 @@ ChatBot::ChatBot(ChatBot &source)
 {
     _chatLogic = source._chatLogic;
     _rootNode = source._rootNode;
-    _image = source._image;
-
+    
+    if (source._image != NULL && source._image != nullptr)
+    {
+        _image = new wxBitmap(*source._image);
+    }
+    
     source._chatLogic = nullptr;
     source._rootNode = nullptr;
     source._currentNode = nullptr;
@@ -73,7 +77,11 @@ ChatBot& ChatBot::operator=(ChatBot &source)
     // _image = new wxBitmap;
     _chatLogic = source._chatLogic;
     _rootNode = source._rootNode;
-    _image = source._image;
+
+    if (source._image != NULL && source._image != nullptr)
+    {
+        _image = new wxBitmap(*source._image);
+    }
 
     source._rootNode = nullptr;
     source._chatLogic = nullptr;
@@ -90,7 +98,12 @@ ChatBot::ChatBot(ChatBot &&source)
     _chatLogic = source._chatLogic;
     _chatLogic->SetChatbotHandle(this);
     _rootNode = source._rootNode;
-    _image = source._image;
+
+   if (source._image != NULL && source._image != nullptr)
+    {
+        _image = new wxBitmap(*source._image);
+    }
+
     source._chatLogic = nullptr;
     source._currentNode = nullptr;
     source._image = nullptr;
@@ -111,7 +124,11 @@ ChatBot& ChatBot::operator = (ChatBot &&source)
     _chatLogic = source._chatLogic;
     _chatLogic->SetChatbotHandle(this);
     _rootNode = source._rootNode;
-    _image = source._image;
+    
+    if (source._image != NULL && source._image != nullptr)
+    {
+        _image = new wxBitmap(*source._image);
+    }
 
     source._chatLogic = nullptr;
     source._rootNode = nullptr;
